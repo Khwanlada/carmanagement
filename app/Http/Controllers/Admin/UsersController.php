@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Location;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -38,10 +37,9 @@ class UsersController extends Controller
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
-        $locations = Location::all()->pluck('name', 'id');
         $roles = \App\Role::get()->pluck('title', 'id');
 
-        return view('admin.users.create', compact('roles','locations'));
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -72,12 +70,11 @@ class UsersController extends Controller
         if (! Gate::allows('user_edit')) {
             return abort(401);
         }
-        $locations = Location::all()->pluck('name', 'id');
         $roles = \App\Role::get()->pluck('title', 'id');
 
         $user = User::findOrFail($id);
 
-        return view('admin.users.edit', compact('user', 'roles','locations'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**

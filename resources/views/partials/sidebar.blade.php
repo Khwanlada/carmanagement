@@ -12,6 +12,36 @@
                 </a>
             </li>
 
+              {{--start for admin--}}
+            
+            @can('user_management_access')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span class="title">@lang('global.user-management.title')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+               
+                @can('user_access')
+                <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="fa fa-user"></i>
+                            <span class="title">
+                                @lang('global.users.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @endcan
+
+
+                </ul>
+
+            {{--end for user--}}
+
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">
                     <i class="fa fa-key"></i>
