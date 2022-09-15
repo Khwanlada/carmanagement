@@ -1,0 +1,21 @@
+
+#wrapper {
+    position: relative;
+}
+
+label.header-text{
+    padding: 5px;
+    background-color: gray;
+    border-radius: 0.5em;
+    font-size: 20px;
+    width: 100%;
+}
+
+form{
+
+    line-height: 0.8 !important;
+}
+table.dataTable,table#tbReport,aside.main-sidebar *,table.tdDetails{
+    font-size: 12px !important;
+}
+
