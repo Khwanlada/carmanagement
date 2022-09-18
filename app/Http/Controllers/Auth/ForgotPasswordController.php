@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ForgotPasswordController extends Controller
 {
@@ -33,6 +35,17 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
+    public function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
+
     public function sendResetLinkEmail(Request $request)
     {
         $email = $request->input('email');
@@ -47,16 +60,23 @@ class ForgotPasswordController extends Controller
          $header .= "MIME-Version: 1.0\r\n";
          $header .= "Content-type: text/html\r\n";
 
-         $temp_password = "www.google.com";
-         $body = view('admin.template_email.forgotpassword', compact('email', 'temp_password'))->render();
-         //echo $body;
-         //exit;
-         $retval = Mail ($to,$subject,$message,$header);
-         
-         if( $retval == true ) {
-            echo "Message sent successfully...";
-         }else {
-            echo "Message could not be sent...";
+         $temp_password = $this->randomPassword();
+         $aaa = env("MAIL_USERNAME");
+
+         $ch_pass = User::where('email', $email)->firstOrFail();
+         if($ch_pass) {
+             $ch_pass->password = Hash::make($temp_password);
+             $ch_pass->save();
          }
+         $body = view('admin.template_email.forgotpassword', compact('email', 'temp_password'))->render();
+         echo $body;
+         exit;
+        //  $retval = Mail ($to,$subject,$message,$header);
+         
+        //  if( $retval == true ) {
+        //     echo "Message sent successfully...";
+        //  }else {
+        //     echo "Message could not be sent...";
+        //  }
     }
 }

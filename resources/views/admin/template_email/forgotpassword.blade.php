@@ -8,8 +8,8 @@
 </head>
 <body>
     
-    Hey there,
-    Someone requested a new password for your {{$email}} account.
+    Hey there,<br>
+    Someone requested a new password for your {{$email}} account.<br>
     
     This is your new password: {{$temp_password}} .
     
