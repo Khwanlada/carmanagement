@@ -9,9 +9,9 @@
 <body>
     
     Hey there,
-    Someone requested a new password for your [username] account.
+    Someone requested a new password for your {{$email}} account.
     
-    This is your new password:[temp_password] .
+    This is your new password: {{$temp_password}} .
     
      🙂
 
