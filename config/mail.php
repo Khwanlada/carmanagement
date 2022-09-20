@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'mail.carmanagement.com'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'mail.carmanagement.com'),
-        'name' => env('MAIL_FROM_NAME', 'Admin'),
+        'address' => env('MAIL_FROM_ADDRESS', 'car.mnm01@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'car.mnm01@gmail.com'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('admin@goldeasyinsure.com'),
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => env('rhSbYw0u'),
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
@@ -111,6 +111,14 @@ return [
     | of the emails. Or, you may simply stick with the Laravel defaults!
     |
     */
+
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
 
     'markdown' => [
         'theme' => 'default',

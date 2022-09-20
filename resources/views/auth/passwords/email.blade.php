@@ -53,6 +53,13 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                @if(session()->has('message'))
+                                {{ session()->get('message') }}
+                            @endif
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
