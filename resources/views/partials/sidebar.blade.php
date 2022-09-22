@@ -35,6 +35,14 @@
                         </a>
                     </li>
                 @endcan
+                @can('location_access')
+                    <li class="{{ $request->segment(2) == 'locations' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.locations.index') }}">
+                            <i class="fa fa-gears"></i>
+                            <span class="title">@lang('global.locations.title')</span>
+                        </a>
+                    </li>
+                @endcan
                 @endcan
 
 
