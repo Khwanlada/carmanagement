@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id')->withTrashed();
+    }
+
     public function sendPasswordResetNotification($token)
     {
        $this->notify(new ResetPasswordNotification($token));
