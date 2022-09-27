@@ -27,6 +27,7 @@
 
                         <th>@lang('global.users.fields.name')</th>
                         <th>@lang('global.users.fields.email')</th>
+                            <th>Location</th>
                         <th>@lang('global.users.fields.role')</th>
 
                                                 <th>&nbsp;</th>
@@ -44,6 +45,7 @@
 
                                 <td field-key='name'>{{ $user->name }}</td>
                                 <td field-key='email'>{{ $user->email }}</td>
+                                <td>{{ $user->location->name }}</td>
                                 <td field-key='role'>
                                     @foreach ($user->role as $singleRole)
                                         <span class="label label-info label-many">{{ $singleRole->title }}</span>

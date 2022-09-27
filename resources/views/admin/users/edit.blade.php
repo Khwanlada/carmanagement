@@ -2,7 +2,6 @@
 
 @section('content')
     <h3 class="page-title">@lang('global.users.title')</h3>
-    
     {!! Form::model($user, ['method' => 'PUT', 'route' => ['admin.users.update', $user->id]]) !!}
 
     <div class="panel panel-default">
@@ -55,6 +54,19 @@
                     @if($errors->has('role'))
                         <p class="help-block">
                             {{ $errors->first('role') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="Location" class="control-label">Location*</label>
+                    {!! Form::select('location_id',$locations, old('location_id'), ['class' => 'form-control', 'placeholder' => '- โปรดเลือก -', "onchange" => "locationChange(this.value);"]) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('location_id'))
+                        <p class="help-block">
+                            {{ $errors->first('location_id') }}
                         </p>
                     @endif
                 </div>

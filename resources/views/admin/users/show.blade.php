@@ -21,6 +21,10 @@
                             <td field-key='email'>{{ $user->email }}</td>
                         </tr>
                         <tr>
+                            <th>Location</th>
+                            <td>{{ $user->location->name }}</td>
+                        </tr>
+                        <tr>
                             <th>@lang('global.users.fields.role')</th>
                             <td field-key='role'>
                                 @foreach ($user->role as $singleRole)

@@ -59,7 +59,19 @@
                 </div>
             </div>
             
-            
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="Location" class="control-label">Location*</label>
+                    {!! Form::select('location_id',$locations, old('location_id'), ['class' => 'form-control', 'placeholder' => '- โปรดเลือก -', "onchange" => "locationChange(this.value);"]) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('location_id'))
+                        <p class="help-block">
+                            {{ $errors->first('location_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
         </div>
     </div>
 
