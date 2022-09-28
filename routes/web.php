@@ -38,6 +38,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('rateCcs_mass_destroy', ['uses' => 'Admin\RateCcsController@massDestroy', 'as' => 'rateCcs.mass_destroy']);
     Route::post('rateCcs_restore/{id}', ['uses' => 'Admin\RateCcsController@restore', 'as' => 'rateCcs.restore']);
     Route::delete('rateCcs_perma_del/{id}', ['uses' => 'Admin\RateCcsController@perma_del', 'as' => 'rateCcs.perma_del']);
+
+    //RateWeight Routes
+    Route::resource('rateWeights', 'Admin\RateWeightsController');
+    Route::post('rateWeights_mass_destroy', ['uses' => 'Admin\RateWeightsController@massDestroy', 'as' => 'rateWeights.mass_destroy']);
+    Route::post('rateWeights_restore/{id}', ['uses' => 'Admin\RateWeightsController@restore', 'as' => 'rateWeights.restore']);
+    Route::delete('rateWeights_perma_del/{id}', ['uses' => 'Admin\RateWeightsController@perma_del', 'as' => 'rateWeights.perma_del']);
 });
 
 

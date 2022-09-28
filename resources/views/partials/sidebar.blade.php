@@ -58,7 +58,16 @@
                     </a>
                 </li>
             @endcan
-            
+
+            @can('rateWeight_access')
+                <li class="{{ $request->segment(2) == 'rateWeights' ? 'active' : '' }}">
+                    <a href="{{ route('admin.rateWeights.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span class="title">อัตราการเสียภาษีรถ คิดตามน้ำหนักรถ</span>
+                    </a>
+                </li>
+            @endcan
+
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">
                     <i class="fa fa-key"></i>
