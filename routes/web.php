@@ -32,6 +32,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('locations_mass_destroy', ['uses' => 'Admin\LocationsController@massDestroy', 'as' => 'locations.mass_destroy']);
     Route::post('locations_restore/{id}', ['uses' => 'Admin\LocationsController@restore', 'as' => 'locations.restore']);
     Route::delete('locations_perma_del/{id}', ['uses' => 'Admin\LocationsController@perma_del', 'as' => 'locations.perma_del']);
+
+    //RateCc Routes
+    Route::resource('rateCcs', 'Admin\RateCcsController');
+    Route::post('rateCcs_mass_destroy', ['uses' => 'Admin\RateCcsController@massDestroy', 'as' => 'rateCcs.mass_destroy']);
+    Route::post('rateCcs_restore/{id}', ['uses' => 'Admin\RateCcsController@restore', 'as' => 'rateCcs.restore']);
+    Route::delete('rateCcs_perma_del/{id}', ['uses' => 'Admin\RateCcsController@perma_del', 'as' => 'rateCcs.perma_del']);
 });
 
 

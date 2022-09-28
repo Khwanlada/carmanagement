@@ -45,11 +45,20 @@
                 @endcan
                 @endcan
 
-
+                
                 </ul>
 
             {{--end for user--}}
 
+            @can('rateCc_access')
+                <li class="{{ $request->segment(2) == 'rateCcs' ? 'active' : '' }}">
+                    <a href="{{ route('admin.rateCcs.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span class="title">อัตราการเสียภาษีรถ ตามความจุกระบอกสูบ (ซีซี.)</span>
+                    </a>
+                </li>
+            @endcan
+            
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">
                     <i class="fa fa-key"></i>
