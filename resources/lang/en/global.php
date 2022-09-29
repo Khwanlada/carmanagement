@@ -50,6 +50,24 @@ return [
         ],
     ],
 
+	'carbrands' => [
+        'title' => 'ยี่ห้อรถ.',
+        'fields' => [
+            'code' => 'code',
+            'name' => 'Name',
+            'carbrand-date' => 'Date',
+        ],
+    ],
+
+    'carmodels' => [
+        'title' => 'รุ่นรถ.',
+        'fields' => [
+            'code' => 'code',
+            'name' => 'Name',
+            'carmodel-date' => 'Date',
+        ],
+    ],
+
 
 
     'app_create' => 'Create',
