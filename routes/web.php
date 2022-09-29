@@ -50,6 +50,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('carbrands_mass_destroy', ['uses' => 'Admin\CarbrandsController@massDestroy', 'as' => 'carbrands.mass_destroy']);
     Route::post('carbrands_restore/{id}', ['uses' => 'Admin\CarbrandsController@restore', 'as' => 'carbrands.restore']);
     Route::delete('carbrands_perma_del/{id}', ['uses' => 'Admin\CarbrandsController@perma_del', 'as' => 'carbrands.perma_del']);
+
+    //Carmodel Routes
+    Route::resource('carmodels', 'Admin\CarmodelsController');
+    Route::post('carmodels_mass_destroy', ['uses' => 'Admin\CarmodelsController@massDestroy', 'as' => 'carmodels.mass_destroy']);
+    Route::post('carmodels_restore/{id}', ['uses' => 'Admin\CarmodelsController@restore', 'as' => 'carmodels.restore']);
+    Route::delete('carmodels_perma_del/{id}', ['uses' => 'Admin\CarmodelsController@perma_del', 'as' => 'carmodels.perma_del']);
 });
 
 

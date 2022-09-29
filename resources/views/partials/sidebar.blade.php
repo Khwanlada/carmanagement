@@ -52,7 +52,16 @@
                                 <span class="title">@lang('global.carbrands.title')</span>
                             </a>
                         </li>
-                    @endcan
+                @endcan
+
+                @can('carmodel_access')
+                        <li class="{{ $request->segment(2) == 'carmodels' ? 'active active-sub' : '' }}">
+                            <a href="{{ route('admin.carmodels.index') }}">
+                                <i class="fa fa-briefcase"></i>
+                                <span class="title">@lang('global.carmodels.title')</span>
+                            </a>
+                        </li>
+                @endcan
                 
                 </ul>
 
