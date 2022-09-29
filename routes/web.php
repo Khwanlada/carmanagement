@@ -44,6 +44,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('rateWeights_mass_destroy', ['uses' => 'Admin\RateWeightsController@massDestroy', 'as' => 'rateWeights.mass_destroy']);
     Route::post('rateWeights_restore/{id}', ['uses' => 'Admin\RateWeightsController@restore', 'as' => 'rateWeights.restore']);
     Route::delete('rateWeights_perma_del/{id}', ['uses' => 'Admin\RateWeightsController@perma_del', 'as' => 'rateWeights.perma_del']);
+
+    //Crabrand Routes
+    Route::resource('carbrands', 'Admin\CarbrandsController');
+    Route::post('carbrands_mass_destroy', ['uses' => 'Admin\CarbrandsController@massDestroy', 'as' => 'carbrands.mass_destroy']);
+    Route::post('carbrands_restore/{id}', ['uses' => 'Admin\CarbrandsController@restore', 'as' => 'carbrands.restore']);
+    Route::delete('carbrands_perma_del/{id}', ['uses' => 'Admin\CarbrandsController@perma_del', 'as' => 'carbrands.perma_del']);
 });
 
 

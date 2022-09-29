@@ -45,6 +45,14 @@
                 @endcan
                 @endcan
 
+                @can('carbrand_access')
+                        <li class="{{ $request->segment(2) == 'carbrands' ? 'active active-sub' : '' }}">
+                            <a href="{{ route('admin.carbrands.index') }}">
+                                <i class="fa fa-briefcase"></i>
+                                <span class="title">@lang('global.carbrands.title')</span>
+                            </a>
+                        </li>
+                    @endcan
                 
                 </ul>
 
