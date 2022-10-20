@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class ForgotPasswordController extends Controller
 {
     /*
@@ -48,22 +50,35 @@ class ForgotPasswordController extends Controller
 
     public function sendResetLinkEmail(Request $request)
     {
+
         $email = $request->input('email');
 
-         $subject = "Forgot password";
+        if(isset($email)){
+            $subject = "Forgot password";
          
-         $temp_password = $this->randomPassword();
-        
-         $ch_pass = User::where('email', $email)->firstOrFail();
-         if($ch_pass) {
-             $ch_pass->password = Hash::make($temp_password);
-             $ch_pass->save();
-         }
-        
+            $temp_password = $this->randomPassword();
+           
+           try
+            {
+                $ch_pass = User::where('email', $email)->firstOrFail();
 
-         Mail::to($email)->queue(new Mailer($subject,$email,$temp_password));
+                $ch_pass->password = Hash::make($temp_password);
+                $ch_pass->save();
+   
+                Mail::to($email)->queue(new Mailer($subject,$email,$temp_password));
+   
+                return back()->with('message', 'Send email already!');
+   
+            }
+            catch (ModelNotFoundException $e)
+            {
+                return redirect()->back()->withErrors('We can’t find a user with that e-mail address.');
+            }
+   
 
-         return back()->with('message', 'Send email already!');
+        }else{
+            return redirect()->back()->withErrors('The email field is required.');
+        }
 
     }
 }

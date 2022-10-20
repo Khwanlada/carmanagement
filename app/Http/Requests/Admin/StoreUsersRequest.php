@@ -28,6 +28,7 @@ class StoreUsersRequest extends FormRequest
             'password' => 'required',
             'role' => 'required',
             'role.*' => 'exists:roles,id',
+            'location_id' => 'required',
         ];
     }
 }

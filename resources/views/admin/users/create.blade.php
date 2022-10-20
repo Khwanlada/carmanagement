@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('role', trans('global.users.fields.role').'*', ['class' => 'control-label']) !!}
-                    {!! Form::select('role[]', $roles, old('role'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
+                    {!! Form::select('role[]', $roles, old('role'), ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('role'))
                         <p class="help-block">
