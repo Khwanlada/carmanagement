@@ -25,6 +25,6 @@ class HomeController extends Controller
     public function index()
     {
         $provinces = json_decode(file_get_contents("https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json"), true);
-        return view('home',compact("provinces"));
+        return view('admin/checks/create',compact("provinces"));
     }
 }

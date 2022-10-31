@@ -30,7 +30,7 @@ class ChecksController extends Controller
             }
         }
 
-        return view('admin.checks.index', compact('checks'));
+        return view('admin.checks.index');
     }
 
     /**
@@ -44,7 +44,8 @@ class ChecksController extends Controller
             return abort(401);
         }
 
-        return view('admin.checks.create');
+        $provinces = json_decode(file_get_contents("https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json"), true);
+        return view('admin.checks.create',compact("provinces"));
     }
 
     /**
