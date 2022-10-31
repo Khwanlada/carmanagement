@@ -55,10 +55,14 @@ class ChecksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreChecksRequest $request)
-    {
+    {  
         if (! Gate::allows('check_create')) {
             return abort(401);
         }
+
+        //dd($request->all());
+
+        $check = Check::create($request->all());
 
         return redirect()->route('admin.checks.index');
     }
