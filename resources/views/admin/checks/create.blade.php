@@ -75,7 +75,7 @@
                 <div class="col-md-12">
 
 
-                    <h3 class="page-title">ตรอ132</h3>
+                    <h3 class="page-title">ตรอ</h3>
                     <form method="POST" action="https://Carmanagement.com/admin/checks" accept-charset="UTF-8"><input
                                 name="_token" type="hidden" value="GAxkUE06uLuWdEZmdioXqaXkQYAgmzY8rG06suzi">
 
@@ -88,9 +88,9 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="register_no">เลขทะเบียนรถ</label>
+                                        <label for="licence_no">เลขทะเบียนรถ</label>
                                         <input class="form-control" placeholder="Enter Register No" required=""
-                                               name="register_no" type="text">
+                                               name="licence_no" type="text">
                                         <p class="help-block"></p>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -149,8 +149,8 @@
                                     <div class="form-group col-md-12">
                                         <label for="inputAddress">ประเภทรถ</label>
                                         <select class="form-control" required=""
-                                                onchange="ProductTypeChange(this.value)"
-                                                name="product_type_id">
+                                                onchange="CarTypeChange(this.value)"
+                                                name="car_type_id">
                                             <option selected="selected" value="0">- โปรดเลือก -</option>
                                             <option value="1">[รย.1] รถยนต์นั่งส่วนบุคคลไม่เกิน 7 คน (รถเก๋ง , รถกระบะ 4
                                                 ประตู) (645.21 บาท)
@@ -167,7 +167,7 @@
                                         </select>
                                         <p class="help-block"></p>
                                         <select class="form-control rateCcs-class" onchange="RateCcsChange()"
-                                                name="rateCcs" style="display: none;">
+                                                name="rate_weights_id" style="display: none;">
                                             <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
                                                 ตามความจุกระบอกสูบ (ซีซี.) -
                                             </option>
@@ -778,7 +778,7 @@
 @stop
 
 <script>
-    function ProductTypeChange(id) {
+    function CarTypeChange(id) {
         if (id !== "") {
             $("[name='txt_product_cmi']").val("");
 
