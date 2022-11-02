@@ -122,7 +122,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label for="customer_name">วันจดทะเบียน</label>
-                                        <input class="form-control date2 hasDatepicker"
+                                        <input class="form-control date2"
                                                placeholder="Enter Car Register Date" name="car_register_date"
                                                type="text" id="dp1662037779104">
                                         <p class="help-block"></p>

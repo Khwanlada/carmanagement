@@ -44,7 +44,7 @@ class ChecksController extends Controller
             return abort(401);
         }
 
-        $provinces = json_decode(file_get_contents("https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json"), true);
+        $provinces = json_decode(file_get_contents(env('PROVINCE_API_URL')), true);
         return view('admin.checks.create',compact("provinces"));
     }
 
@@ -60,7 +60,25 @@ class ChecksController extends Controller
             return abort(401);
         }
 
-        //dd($request->all());
+        $input = $request->all();
+        $input["legalEntity"] = isset($input["legalEntity"]) ? 1 : 0;
+        $input["ngvcng"] = isset($input["ngvcng"]) ? 1 : 0;
+        $input["hybrid"] = isset($input["hybrid"]) ? 1 : 0;
+        $input["israte"] = isset($input["israte"]) ? 1 : 0;
+        $input["ispercen_discount"] = isset($input["ispercen_discount"]) ? 1 : 0;
+        $input["isinspection"] = isset($input["isinspection"]) ? 1 : 0;
+        $input["ispercen_late"] = isset($input["ispercen_late"]) ? 1 : 0;
+        //
+        $input["istax_car_service"] = isset($input["istax_car_service"]) ? 1 : 0;
+        $input["is_product_cmi"] = isset($input["is_product_cmi"]) ? 1 : 0;
+        $input["is_product_vmi"] = isset($input["is_product_vmi"]) ? 1 : 0;
+        $input["isother_service"] = isset($input["isother_service"]) ? 1 : 0;
+        $input["isother_service2"] = isset($input["isother_service2"]) ? 1 : 0;
+        $input["isother_service3"] = isset($input["isother_service3"]) ? 1 : 0;
+        $input["isCopyBook"] = isset($input["isCopyBook"]) ? 1 : 0;
+
+
+        dd($input);
 
         $check = Check::create($request->all());
 
