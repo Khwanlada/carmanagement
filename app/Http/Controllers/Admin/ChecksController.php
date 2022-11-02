@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreChecksRequest;
 use App\Http\Requests\Admin\UpdateChecksRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ChecksController extends Controller
 {
@@ -28,9 +29,28 @@ class ChecksController extends Controller
             if (!Gate::allows('check_delete')) {
                 return abort(401);
             }
+            $checks = Check::onlyTrashed()->get();
+        } else {
+            $start_date = request("s_date");
+            if (!empty($start_date)) {
+                $checks = Check::join('users', 'users.email', '=', 'checks.create_by')
+                    ->where('checks.check_date', '=', $start_date)
+                    ->where('users.location_id', '=', Auth::user()->location->id)
+                    ->orderBy('checks.id','desc')
+                    ->get(['checks.*']);
+
+            } else {
+                $checks = Check::join('users', 'users.email', '=', 'checks.create_by')
+                    ->where('checks.check_date', '=',date('Y-m-d'))
+                    ->where('users.location_id', '=', Auth::user()->location->id)
+                    ->orderBy('checks.id','desc')
+                    ->get(['checks.*']);
+            }
         }
 
-        return view('admin.checks.index');
+        //echo($checks);
+
+        return view('admin.checks.index', compact('checks'));
     }
 
     /**
@@ -77,10 +97,11 @@ class ChecksController extends Controller
         $input["isother_service3"] = isset($input["isother_service3"]) ? 1 : 0;
         $input["isCopyBook"] = isset($input["isCopyBook"]) ? 1 : 0;
 
+        $input["iscmi_service"] = isset($input["iscmi_service"]) ? 1 : 0;
 
-        dd($input);
+        //dd($input);
 
-        $check = Check::create($request->all());
+        $check = Check::create($input);
 
         return redirect()->route('admin.checks.index');
     }

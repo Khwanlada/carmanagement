@@ -761,6 +761,8 @@
                             </div>
                         </div>
 
+                        <input type="hidden" id="create_by" name="create_by" value="{{ Auth::user()->email }}"/>
+
                         {!! Form::submit(trans('global.app_save'), ['class' => 'btn btn-danger save-bt',"onclick" => "return confirmData()"]) !!}
                         {!! Form::close() !!}
 
