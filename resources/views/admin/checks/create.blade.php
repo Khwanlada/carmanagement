@@ -412,7 +412,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <input type="number" class="form-control month_rate" id="month_rate_1"
-                                                   name="month_rate_1" placeholder="ล่าช้า ปี">
+                                                   name="month_rate_1" placeholder="ล่าช้า ปี" oninput="month_rate_1_onInput(this.value)">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <input type="number" step="any" class="form-control month_rate"
@@ -892,6 +892,11 @@ $(document).ready(function(){
         });
     }
 
+    function month_rate_1_onInput($value){
+        $("#month_rate_2").val(parseInt($value)-1);
+        $("#month_rate_3").val(parseInt($value)-2);
+
+    }
 
     function calCulateTotal(){
 
