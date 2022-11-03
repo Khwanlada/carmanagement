@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreChecksRequest;
 use App\Http\Requests\Admin\UpdateChecksRequest;
 use Illuminate\Support\Facades\Auth;
+use App\RateCc;
+use App\RateWeight;
 
 class ChecksController extends Controller
 {
@@ -64,8 +66,12 @@ class ChecksController extends Controller
             return abort(401);
         }
 
+        $rateCcs = RateCc::all()->pluck('name', 'id');
+        $rateWeights = RateWeight::all()->pluck('type', 'id');
+
         $provinces = json_decode(file_get_contents(env('PROVINCE_API_URL')), true);
-        return view('admin.checks.create',compact("provinces"));
+        
+        return view('admin.checks.create',compact("provinces","rateCcs","rateWeights"));
     }
 
     /**

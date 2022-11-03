@@ -72,7 +72,7 @@
 
 
                     <h3 class="page-title">ตรอ</h3>
-                    {!! Form::open(['method' => 'POST', 'route' => ['admin.checks.store']]) !!}
+                    {!! Form::open(['id'=>'form1','method' => 'POST', 'route' => ['admin.checks.store']]) !!}
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -161,7 +161,7 @@
                                             </option>
                                         </select>
                                         <p class="help-block"></p>
-                                        <select class="form-control rateCcs-class" onchange="RateCcsChange()"
+                                        {{-- <select class="form-control rateCcs-class" onchange="RateCcsChange(this.value)"
                                                 name="rate_weights_id" style="display: none;">
                                             <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
                                                 ตามความจุกระบอกสูบ (ซีซี.) -
@@ -175,9 +175,18 @@
                                             <option value="8">เป็นรถเก่าใช้งานมานานเกิน 9 ปี ให้ลดภาษี</option>
                                             <option value="9">เป็นรถเก่าใช้งานมานานเกิน 10 ปี หรือปีต่อๆไป</option>
                                             <option value="10">รถจักรยานยนต์</option>
-                                        </select>
-                                        <p class="help-block rateCcs-class" style="display: none;"></p>
-                                        <select class="form-control rateWeights-class"
+                                        </select> --}}
+
+                                        {!! Form::select('rate_ccs_id',$rateCcs, old('rate_ccs_id'), ['class' => 'form-control rateCcs-class', 'placeholder' => '- เลือก อัตราการเสียภาษีรถ ตามความจุกระบอกสูบ (ซีซี.) -', "onchange" => "RateCcsChange(this.value)" ]) !!}
+                                        <p class="help-block rateCcs-class"></p>
+                                        @if($errors->has('rateCcs'))
+                                            <p class="help-block rateCcs-class">
+                                                {{ $errors->first('rateCcs') }}
+                                            </p>
+                                        @endif
+
+                                        {{-- <p class="help-block rateCcs-class" style="display: none;"></p> --}}
+                                        {{-- <select class="form-control rateWeights-class"
                                                 style="display: none;">
                                             <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
                                                 คิดตามน้ำหนักรถ -
@@ -198,8 +207,15 @@
                                             <option value="14">5,001 - 6,000</option>
                                             <option value="15">6,001 - 7,000</option>
                                             <option value="16">7,000 ขึ้นไป</option>
-                                        </select>
-                                        <p class="help-block rateWeights-class" style="display: none;"></p>
+                                        </select> --}}
+                                        {!! Form::select('rate_weights_id',$rateWeights, old('rate_weights_id'), ['class' => 'form-control rateWeights-class', 'placeholder' => '- เลือก อัตราการเสียภาษีรถ คิดตามน้ำหนักรถ -', "onchange" => "RateWeightsChange(this.value)" ]) !!}
+                                        <p class="help-block rateWeights-class"></p>
+                                        @if($errors->has('rateWeights'))
+                                            <p class="help-block rateWeights-class">
+                                                {{ $errors->first('rateWeights') }}
+                                            </p>
+                                        @endif
+                                        {{-- <p class="help-block rateWeights-class" style="display: none;"></p> --}}
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -777,6 +793,22 @@
     @parent
 
 <script>
+
+    
+$(document).ready(function(){
+
+            // $("#form1 input:checkbox").bind("click", function(){
+
+            //     alert(123);
+
+            //         $listAllCheckboxInForm = $('input[type=checkbox]:checked');
+            //         $listAllCheckboxInForm.each(function()
+            //         {
+            //             alert(456);
+            //         });
+            // });
+
+});
     
     $('.date').datepicker({
             autoclose: true,
