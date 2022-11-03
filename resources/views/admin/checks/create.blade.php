@@ -797,16 +797,12 @@
     
 $(document).ready(function(){
 
-            // $("#form1 input:checkbox").bind("click", function(){
-
-            //     alert(123);
-
-            //         $listAllCheckboxInForm = $('input[type=checkbox]:checked');
-            //         $listAllCheckboxInForm.each(function()
-            //         {
-            //             alert(456);
-            //         });
-            // });
+        $("#form1 input:checkbox").bind("click", function(){
+            calCulateTotal();
+        });
+        $("#form1 input[type=number]").bind("input", function(){
+            calCulateTotal();
+        });
 
 });
     
@@ -895,6 +891,57 @@ $(document).ready(function(){
             $("#month_rate_3_more").val("");
         });
     }
+
+
+    function calCulateTotal(){
+
+            var totalNet = 0.00;
+                if ($("#israte").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#rate").val())) ? 0 : parseFloat($("#rate").val());
+                }
+
+                if ($("#ispercen_discount").prop("checked") === true) {
+                    totalNet -= isNaN(parseFloat($("#percen_discount").val())) ? 0 : parseFloat($("#percen_discount").val());
+                }
+                if ($("#ispercen_late").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#month_rate_1_total").val())) ? 0 : parseFloat($("#month_rate_1_total").val());
+                    totalNet += isNaN(parseFloat($("#month_rate_1_more").val())) ? 0 : parseFloat($("#month_rate_1_more").val());
+                    totalNet += isNaN(parseFloat($("#month_rate_2_total").val())) ? 0 : parseFloat($("#month_rate_2_total").val());
+                    totalNet += isNaN(parseFloat($("#month_rate_2_more").val())) ? 0 : parseFloat($("#month_rate_2_more").val());
+                    totalNet += isNaN(parseFloat($("#month_rate_3_total").val())) ? 0 : parseFloat($("#month_rate_3_total").val());
+                    totalNet += isNaN(parseFloat($("#month_rate_3_more").val())) ? 0 : parseFloat($("#month_rate_3_more").val());
+                }
+                if ($("#isinspection").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#inspection").val())) ? 0 : parseFloat($("#inspection").val());
+                }
+                if ($("#istax_car_service").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#tax_car_service").val())) ? 0 : parseFloat($("#tax_car_service").val());
+                }
+                if ($("#is_product_cmi").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#txt_product_cmi").val())) ? 0 : parseFloat($("#txt_product_cmi").val());
+                }
+                if ($("#is_product_vmi").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#txt_product_vmi").val())) ? 0 : parseFloat($("#txt_product_vmi").val());
+                }
+                if ($("#isother_service").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#other_service").val())) ? 0 : parseFloat($("#other_service").val());
+                }
+                if ($("#isother_service2").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#other_service2").val())) ? 0 : parseFloat($("#other_service2").val());
+                }
+                if ($("#isother_service3").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#other_service3").val())) ? 0 : parseFloat($("#other_service3").val());
+                }
+                    totalNet -= isNaN(parseFloat($("#discount").val())) ? 0 : parseFloat($("#discount").val());
+                
+                
+                
+                
+
+                $("#totalNet").val(totalNet.toFixed(2));
+                $("#btTotalNet").val(totalNet.toFixed(2));
+            }
+
 </script>
 
 @stop

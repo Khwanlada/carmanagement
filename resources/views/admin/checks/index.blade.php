@@ -88,7 +88,6 @@
                         <th>พรบ./ประกันภัย1-3</th>
                         <th>ชำระเงิน</th>
                             <th>ใบเสร็จ</th>
-                            <th>พิมพ์ Mini</th>
                             <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -120,9 +119,6 @@
                                     <td field-key='name'>{{ $check->paytype }}</td>
                                     <td>
                                         <a href="#" class="btn btn-xs btn-primary" onclick="btnPrint('{{$check}}')">ใบเสร็จ</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-xs btn-primary" onclick="btnPrintMini('{{$check}}')">พิมพ์ Mini</a>
                                     </td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
