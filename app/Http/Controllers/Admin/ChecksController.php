@@ -17,6 +17,19 @@ class ChecksController extends Controller
     function __construct() {
 
     }
+
+    public function ajaxRequestPost(Request $request)
+    {
+        $id = $request->json()->get('id');
+        $rateCC = RateCc::findOrFail($id);
+        if($rateCC) {
+            return response()->json($rateCC);
+        }
+
+        return response()->json([]);
+    }
+
+
     /**
      * Display a listing of Check.
      *

@@ -898,6 +898,8 @@ $(document).ready(function(){
 
     }
 
+
+    $reference_rateCss = null;
     function calCulateTotal(){
 
             var totalNet = 0.00;
@@ -946,6 +948,27 @@ $(document).ready(function(){
                 $("#totalNet").val(totalNet.toFixed(2));
                 $("#btTotalNet").val(totalNet.toFixed(2));
             }
+
+
+    function RateCcsChange($id) {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+        $.ajax({
+                url: "{{ route('admin.checks.ajaxRequest.post') }}",
+                type: "POST",
+                data: JSON.stringify({
+                    id: $id
+                }),
+                success: function (datas) {
+                   // console.log(datas);
+                   $reference_rateCss = datas;
+                }
+            });
+    }
 
 </script>
 
