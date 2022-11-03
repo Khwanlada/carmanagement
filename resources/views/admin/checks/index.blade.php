@@ -81,7 +81,6 @@
                         <th>จังหวัด</th>
                         <th>ชื่อลูกค้า</th>
                         <th>เบอร์โทร</th>
-                        <th>ประเภทพรถ</th>
                         <th>CC</th>
                         <th>น้ำหนัก</th>
                         <th>ยอดรวมทั้งหมด</th>
@@ -104,14 +103,13 @@
 
                                 <td field-key='name'>{{ $check->id }}</td>
                                 <td field-key='check_date'>{{ $check->check_date }}</td>
-                                <td field-key='check_date'>{{ $check->register_no }}</td>
+                                <td field-key='check_date'>{{ $check->licence_no }}</td>
                                 <td field-key='name'>{{ $check->car_register_date }}</td>
-                                <td field-key='name'>{{ $check->province}}</td>
+                                <td field-key='name'>{{ $check->province($check->province_id)}}</td>
                                 <td field-key='name'>{{ $check->customer_name }}</td>
                                 <td field-key='name'>{{ $check->customer_tel }}</td>
-                                <td field-key='name'>{{ $check->productType }}</td>
-                                <td field-key='name'>@if(isset($check->rateCcs)) {{ $check->rateCc->name }} @endif</td>
-                                <td field-key='name'>@if(isset($check->rateWeights)) {{ $check->rateWeight->type }} @endif</td>
+                                <td field-key='name'>@if(isset($check->rate_ccs_id)) {{ $check->rateCc->name }} @endif</td>
+                                <td field-key='name'>@if(isset($check->rate_weights_id)) {{ $check->rateWeight->type }} @endif</td>
                                 <td field-key='name'>{{ number_format($check->totalNet,2) }}</td>
                                     <td field-key='name'>{{ $check->create_by}}</td>
                                 <td field-key='name'>

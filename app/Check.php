@@ -19,6 +19,20 @@ class Check extends Model
         'dlt_total_net','dlt_extra_money','dlt_money_refund','iscmi_service','cmi_service','discount','normal_remark',
         'isCopyBook'];
 
-    
+    public function province($province_id)
+    {
+        $provinces = json_decode(file_get_contents(env('PROVINCE_API_URL')), true);
+        return $provinces[$province_id]["name_th"];
+    }
+
+    public function rateCc()
+    {
+        return $this->belongsTo(RateCc::class, 'rate_ccs_id')->withTrashed();
+    }
+
+    public function rateWeight()
+    {
+        return $this->belongsTo(RateWeight::class, 'rate_weights_id')->withTrashed();
+    }
 
 }
