@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Check;
+use App\RateWeight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -10,7 +11,6 @@ use App\Http\Requests\Admin\StoreChecksRequest;
 use App\Http\Requests\Admin\UpdateChecksRequest;
 use Illuminate\Support\Facades\Auth;
 use App\RateCc;
-use App\RateWeight;
 
 class ChecksController extends Controller
 {
@@ -24,6 +24,17 @@ class ChecksController extends Controller
         $rateCC = RateCc::findOrFail($id);
         if($rateCC) {
             return response()->json($rateCC);
+        }
+
+        return response()->json([]);
+    }
+
+    public function ajaxRequestWeightPost(Request $request)
+    {
+        $id = $request->json()->get('id');
+        $RateWeight = RateWeight::findOrFail($id);
+        if($RateWeight) {
+            return response()->json($RateWeight);
         }
 
         return response()->json([]);
@@ -79,7 +90,7 @@ class ChecksController extends Controller
             return abort(401);
         }
 
-        $rateCcs = RateCc::all()->pluck('name', 'id');
+        $rateCcs = RateCc::all()->where('type','!=','FixRate')->pluck('name', 'id');
         $rateWeights = RateWeight::all()->pluck('type', 'id');
 
         $provinces = json_decode(file_get_contents(env('PROVINCE_API_URL')), true);

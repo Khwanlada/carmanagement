@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::delete('checks_perma_del/{id}', ['uses' => 'Admin\ChecksController@perma_del', 'as' => 'checks.perma_del']);
 
     Route::post('ajaxRequest', 'Admin\ChecksController@ajaxRequestPost')->name('checks.ajaxRequest.post');
+    Route::post('ajaxRequestWeight', 'Admin\ChecksController@ajaxRequestWeightPost')->name('checks.ajaxRequestWeight.post');
 
 });
 

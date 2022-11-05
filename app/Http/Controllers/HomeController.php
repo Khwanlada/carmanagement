@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $provinces = json_decode(file_get_contents(env('PROVINCE_API_URL')), true);
-        return view('admin/checks/create',compact("provinces"));
+
+        return redirect()->route('admin.checks.create');
     }
 }

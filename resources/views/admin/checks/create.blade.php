@@ -161,21 +161,7 @@
                                             </option>
                                         </select>
                                         <p class="help-block"></p>
-                                        {{-- <select class="form-control rateCcs-class" onchange="RateCcsChange(this.value)"
-                                                name="rate_weights_id" style="display: none;">
-                                            <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                ตามความจุกระบอกสูบ (ซีซี.) -
-                                            </option>
-                                            <option value="1">ไม่เกิน 5 ปี cc น้อยกว่า 600</option>
-                                            <option value="2">ไม่เกิน 5 ปี cc 601 - 1,800</option>
-                                            <option value="3">ไม่เกิน 5 ปี cc เกิน 1,800</option>
-                                            <option value="5">เป็นรถเก่าใช้งานมานานเกิน 6 ปี ให้ลดภาษี</option>
-                                            <option value="6">เป็นรถเก่าใช้งานมานานเกิน 7 ปี ให้ลดภาษี</option>
-                                            <option value="7">เป็นรถเก่าใช้งานมานานเกิน 8 ปี ให้ลดภาษี</option>
-                                            <option value="8">เป็นรถเก่าใช้งานมานานเกิน 9 ปี ให้ลดภาษี</option>
-                                            <option value="9">เป็นรถเก่าใช้งานมานานเกิน 10 ปี หรือปีต่อๆไป</option>
-                                            <option value="10">รถจักรยานยนต์</option>
-                                        </select> --}}
+             
 
                                         {!! Form::select('rate_ccs_id',$rateCcs, old('rate_ccs_id'), ['class' => 'form-control rateCcs-class', 'placeholder' => '- เลือก อัตราการเสียภาษีรถ ตามความจุกระบอกสูบ (ซีซี.) -', "onchange" => "RateCcsChange(this.value)" ]) !!}
                                         <p class="help-block rateCcs-class"></p>
@@ -185,29 +171,6 @@
                                             </p>
                                         @endif
 
-                                        {{-- <p class="help-block rateCcs-class" style="display: none;"></p> --}}
-                                        {{-- <select class="form-control rateWeights-class"
-                                                style="display: none;">
-                                            <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                คิดตามน้ำหนักรถ -
-                                            </option>
-                                            <option value="1">ไม่เกิน 500</option>
-                                            <option value="2">501 - 750</option>
-                                            <option value="3">751 - 1,000</option>
-                                            <option value="4">1,001 - 1,250</option>
-                                            <option value="5">1,251 - 1,500</option>
-                                            <option value="6">1,501 - 1,750</option>
-                                            <option value="7">1,751 - 2,000</option>
-                                            <option value="8">2,001 - 2,500</option>
-                                            <option value="9">2,501 - 3,000</option>
-                                            <option value="10">3,001 - 3,500</option>
-                                            <option value="11">3,501 - 4,000</option>
-                                            <option value="12">4,001 - 4,500</option>
-                                            <option value="13">4,501 - 5,000</option>
-                                            <option value="14">5,001 - 6,000</option>
-                                            <option value="15">6,001 - 7,000</option>
-                                            <option value="16">7,000 ขึ้นไป</option>
-                                        </select> --}}
                                         {!! Form::select('rate_weights_id',$rateWeights, old('rate_weights_id'), ['class' => 'form-control rateWeights-class', 'placeholder' => '- เลือก อัตราการเสียภาษีรถ คิดตามน้ำหนักรถ -', "onchange" => "RateWeightsChange(this.value)" ]) !!}
                                         <p class="help-block rateWeights-class"></p>
                                         @if($errors->has('rateWeights'))
@@ -797,6 +760,9 @@
     
 $(document).ready(function(){
 
+        $(".rateCcs-class").hide();
+        $(".rateWeights-class").hide();
+
         $("#form1 input:checkbox").bind("click", function(){
             calCulateTotal();
         });
@@ -824,7 +790,7 @@ $(document).ready(function(){
 
             if (id === "4") {
                 $("[name='type_text']").val("รถจักรยานยนต์");
-                $(".rateCcs-class").show();
+                $(".rateCcs-class").hide();
                 $("[name='rateCcs']").hide();
                 $("[name='rateCcs']").attr('disabled', false);
                 $(".rateWeights-class").hide();
@@ -836,6 +802,14 @@ $(document).ready(function(){
                 $("[name='rateCcs']").trigger('change');
 
                 $(".fixed-rate-form").show();
+
+                //default checked checkbox when fixed rate
+                   $("#israte").prop('checked',true);
+                   $("#istax_car_service").prop('checked',true);
+                   $("#rate").val(100);
+                   $("#inspection").val(60);
+                   $("#tax_car_service").val(100);
+                   calCulateTotal();
 
             } else if (id === "1") {
                 $(".rateCcs-class").show();
@@ -900,6 +874,7 @@ $(document).ready(function(){
 
 
     $reference_rateCss = null;
+    $reference_rateWeight = null;
     function calCulateTotal(){
 
             var totalNet = 0.00;
@@ -966,6 +941,52 @@ $(document).ready(function(){
                 success: function (datas) {
                    // console.log(datas);
                    $reference_rateCss = datas;
+
+                   //set default checkbox checked
+                   $("#israte").prop('checked',true);
+                   $("#istax_car_service").prop('checked',true);
+                   $("#inspection").val(datas.inspection);
+                   $("#tax_car_service").val(datas.tax_car_service);
+
+                   if(datas.id>3){
+                    $("#ispercen_discount").prop('checked',true);
+                    $("#percen_discount").val(datas.percen_discount);
+                   }
+
+                   calCulateTotal();
+                }
+            });
+    }
+
+    function RateWeightsChange($id) {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+        $.ajax({
+                url: "{{ route('admin.checks.ajaxRequestWeight.post') }}",
+                type: "POST",
+                data: JSON.stringify({
+                    id: $id
+                }),
+                success: function (datas) {
+                   // console.log(datas);
+                   $reference_rateWeight = datas;
+                   
+                   //set default checkbox checked
+                   $("#israte").prop('checked',true);
+                   $("#istax_car_service").prop('checked',true);
+                   $("#inspection").val(datas.inspection);
+                   $("#tax_car_service").val(datas.tax_car_service);
+
+                   if(datas.id>3){
+                    $("#ispercen_discount").prop('checked',true);
+                    $("#percen_discount").val(datas.percen_discount);
+                   }
+
+                   calCulateTotal();
                 }
             });
     }
