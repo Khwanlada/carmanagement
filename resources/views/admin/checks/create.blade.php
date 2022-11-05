@@ -770,6 +770,98 @@ $(document).ready(function(){
             calCulateTotal();
         });
 
+
+        $("[name='cc']").bind("input", function(){
+            var typeId = $("[name='car_type_id']").val();
+            //fixed rate
+            if(typeId === "4"){
+                $("[name='txt_product_cmi']").val("0");
+                var ccDefault = isNaN(parseFloat($("[name='cc']").val())) ? 0 : parseFloat($("[name='cc']").val());
+                        if(ccDefault ===0){
+                            $("[name='txt_product_cmi']").val("0");
+                        }
+                        else if(ccDefault <= 75){
+                            $("[name='txt_product_cmi']").val("161.57");
+                        }
+                        else if(ccDefault > 75 && ccDefault <= 125){
+                            $("[name='txt_product_cmi']").val("323.14");
+                        }
+                        else if(ccDefault > 125 && ccDefault <= 150){
+                            $("[name='txt_product_cmi']").val("430.14");
+                        }
+                        else if(ccDefault > 150){
+                            $("[name='txt_product_cmi']").val("645.21");
+                        }
+            }else{
+                var rate_ccs_id = $("[name='rate_ccs_id']").val();
+                var rate_weights_id = $("[name='rate_weights_id']").val();
+                if(rate_ccs_id !== ""){
+                    // users selected cc reate droupdown
+                            var cc = isNaN(parseFloat($("[name='cc']").val())) ? 0 : parseFloat($("[name='cc']").val());
+                            var rateCc = isNaN(parseFloat($reference_rateCss.rate)) ? 0 : parseFloat(($reference_rateCss.rate));
+
+                            var totalCalBeforeRate = 0.0;
+                            if (cc <= 600) {
+                                totalCalBeforeRate += cc * rateCc;
+                            }
+                            else if (cc >= 601 && cc <= 1800) {
+                                totalCalBeforeRate += 600 * 0.5;
+                                totalCalBeforeRate += (cc - 600) * rateCc;
+                            }
+                            else if (cc >= 1801) {
+                                totalCalBeforeRate += 600 * 0.5;//600
+                                totalCalBeforeRate += 1200 * 1.5;//1200
+                                totalCalBeforeRate += (cc - 1800) * rateCc;
+                            }
+
+                            totalRate = totalCalBeforeRate;
+
+                            if ($("#ngvcng").prop("checked") === true) {
+                                totalRate = totalCalBeforeRate - ((totalCalBeforeRate * $reference_rateCss.ngv_cng) / 100);
+                            } else if ($("#hybrid").prop("checked") === true) {
+                                totalRate = totalCalBeforeRate - ((totalCalBeforeRate * $reference_rateCss.hybrid) / 100);
+                            }
+
+                            if ($("#legalEntity").prop("checked") === true) {
+                                totalRate = totalRate * $reference_rateCss.legalEntity;
+                            }
+
+                        $("#rate").val(totalRate.toFixed(2));
+                        calCulateTotal();
+                }
+                else if(rate_weights_id !== ""){
+                    // users selected weight reate droupdown
+                        var weg = isNaN(parseFloat($("[name='weight']").val())) ? 0 : parseFloat($("[name='weight']").val());
+
+                        var calWeight = $reference_rateWeight;
+
+                        var rateWeight = 0;
+                        if(typeId === 2){
+                            rateWeight = calWeight.car1;
+                        }else if(typeId === 3){
+                            rateWeight = calWeight.car4;
+                        }
+
+                        $("#txtRateWeight").val(rateWeight);
+                        totalRate = rateWeight;
+
+                        if ($("#ngvcng").prop("checked") === true) {
+                            totalRate = rateWeight - (rateWeight * rwObj.ngv_cng) / 100;
+                        } else if ($("#hybrid").prop("checked") === true) {
+                            totalRate = rateWeight - (rateWeight * rwObj.hybrid) / 100;
+                        }
+
+                        if ($("#legalEntity").prop("checked") === true) {
+                            totalRate = totalRate * rwObj.legalEntity;
+                        }
+
+                    $("#rate").val(totalRate.toFixed(2));
+
+                    calCulateTotal();
+                }
+            }
+        });
+
 });
     
     $('.date').datepicker({
@@ -809,6 +901,7 @@ $(document).ready(function(){
                    $("#rate").val(100);
                    $("#inspection").val(60);
                    $("#tax_car_service").val(100);
+                   $("#cmi_service").val(27);
                    calCulateTotal();
 
             } else if (id === "1") {
@@ -823,6 +916,9 @@ $(document).ready(function(){
 
                 $(".fixed-rate-form").hide();
 
+                $("[name='rate_ccs_id']").val("");
+                $("[name='rate_weights_id']").val("");
+
             } else if (id === "2" || id === "3") {
                 $(".rateCcs-class").hide();
                 $(".rateWeights-class").show();
@@ -833,6 +929,9 @@ $(document).ready(function(){
                 $("[name='txtRateWeight']").val("");
 
                 $(".fixed-rate-form").hide();
+
+                $("[name='rate_ccs_id']").val("");
+                $("[name='rate_weights_id']").val("");
 
             } else {
                 $(".rateCcs-class").hide();
@@ -911,15 +1010,15 @@ $(document).ready(function(){
                 if ($("#isother_service2").prop("checked") === true) {
                     totalNet += isNaN(parseFloat($("#other_service2").val())) ? 0 : parseFloat($("#other_service2").val());
                 }
+                if ($("#iscmi_service").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#cmi_service").val())) ? 0 : parseFloat($("#cmi_service").val());
+                }
                 if ($("#isother_service3").prop("checked") === true) {
                     totalNet += isNaN(parseFloat($("#other_service3").val())) ? 0 : parseFloat($("#other_service3").val());
                 }
                     totalNet -= isNaN(parseFloat($("#discount").val())) ? 0 : parseFloat($("#discount").val());
                 
                 
-                
-                
-
                 $("#totalNet").val(totalNet.toFixed(2));
                 $("#btTotalNet").val(totalNet.toFixed(2));
             }
@@ -953,6 +1052,8 @@ $(document).ready(function(){
                     $("#percen_discount").val(datas.percen_discount);
                    }
 
+                    $("[name='cc']").trigger('input');
+
                    calCulateTotal();
                 }
             });
@@ -974,7 +1075,7 @@ $(document).ready(function(){
                 success: function (datas) {
                    // console.log(datas);
                    $reference_rateWeight = datas;
-                   
+
                    //set default checkbox checked
                    $("#israte").prop('checked',true);
                    $("#istax_car_service").prop('checked',true);
@@ -985,6 +1086,8 @@ $(document).ready(function(){
                     $("#ispercen_discount").prop('checked',true);
                     $("#percen_discount").val(datas.percen_discount);
                    }
+
+                   $("[name='weight']").trigger('input');
 
                    calCulateTotal();
                 }
