@@ -39,7 +39,6 @@
                         <th>นิติบุคคลที่มิได้เป็นผู้ให้เช่าซื้อ(คูณ x)</th>
                         <th>ส่วนลด NGV/CNG(%)</th>
                         <th>ส่วนลด Hybrid(%)</th>
-                        <th>บาท(CC คูณ x)</th>
                         <th>รถเก่าใช้งานมานานเกิน 5 ปี ให้ลดภาษี(% จากภาษี)</th>
                         <th>ค่าปรับเสียภาษีล่าช้า (% เดือน)</th>
                         <th>ค่าตรวจสภาพรถ</th>
@@ -70,7 +69,6 @@
                                 <td field-key='legalEntity'>{{ $rateCcs->legalEntity }}</td>
                                 <td field-key='ngv_cng'>{{ $rateCcs->ngv_cng }}</td>
                                 <td field-key='hybrid'>{{ $rateCcs->hybrid }}</td>
-                                <td field-key='rate'>{{ $rateCcs->rate }}</td>
                                 <td field-key='percen_discount'>{{ $rateCcs->percen_discount }}</td>
                                 <td field-key='percen_late'>{{ $rateCcs->percen_late }}</td>
                                 <td field-key='inspection'>{{ $rateCcs->inspection }}</td>

@@ -29,16 +29,8 @@
                             <td field-key='car1'>{{ $rateWeight->car1 }}</td>
                         </tr>
                         <tr>
-                            <th>รถยนต์รับจ้างระหว่างจังหวัด /รถยนต์บริการ</th>
-                            <td field-key='car2'>{{ $rateWeight->car2 }}</td>
-                        </tr>
-                        <tr>
-                            <th>รถยนต์รับจ้าง</th>
-                            <td field-key='car3'>{{ $rateWeight->car3 }}</td>
-                        </tr>
-                        <tr>
                             <th>รถยนต์บรรทุกส่วนบุคคล /รถยนต์ลากจูง /รถแทรกเตอร์ที่มีได้ใช้ในการเกษตร</th>
-                            <td field-key='car4'>{{ $rateWeight->car4 }}</td>
+                            <td field-key='car2'>{{ $rateWeight->car2 }}</td>
                         </tr>
                         <tr>
                             <th>ิติบุคคลที่มิได้เป็นผู้ให้เช่าซื้อ(คูณ x)</th>

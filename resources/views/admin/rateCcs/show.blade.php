@@ -37,10 +37,6 @@
                             <td field-key='hybrid'>{{ $rateCc->hybrid }}</td>
                         </tr>
                         <tr>
-                            <th>บาท(CC คูณ x)</th>
-                            <td field-key='rate'>{{ $rateCc->rate }}</td>
-                        </tr>
-                        <tr>
                             <th>รถเก่าใช้งานมานานเกิน 5 ปี ให้ลดภาษี(% จากภาษี)</th>
                             <td field-key='percen_discount'>{{ $rateCc->percen_discount }}</td>
                         </tr>

@@ -58,38 +58,15 @@
                     @endif
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    <label for="car2" class="control-label">รถยนต์รับจ้างระหว่างจังหวัด /รถยนต์บริการ</label>
+                    <label for="car2" class="control-label">รถยนต์บรรทุกส่วนบุคคล /รถยนต์ลากจูง /รถแทรกเตอร์ที่มีได้ใช้ในการเกษตร</label>
                     {!! Form::number('car2', old('car2'), ['class' => 'form-control', 'placeholder' => 'Enter number', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('car2'))
                         <p class="help-block">
                             {{ $errors->first('car2') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="car3" class="control-label">รถยนต์รับจ้าง</label>
-                    {!! Form::number('car3', old('car3'), ['class' => 'form-control', 'placeholder' => 'Enter number', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('car3'))
-                        <p class="help-block">
-                            {{ $errors->first('car3') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="car4" class="control-label">รถยนต์บรรทุกส่วนบุคคล /รถยนต์ลากจูง /รถแทรกเตอร์ที่มีได้ใช้ในการเกษตร</label>
-                    {!! Form::number('car4', old('car4'), ['class' => 'form-control', 'placeholder' => 'Enter number', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('car4'))
-                        <p class="help-block">
-                            {{ $errors->first('car4') }}
                         </p>
                     @endif
                 </div>

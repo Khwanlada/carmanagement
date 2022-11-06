@@ -38,8 +38,6 @@
                         <th>น้ำหนักเริ่ม</th>
                         <th>น้ำหนักสิ้นสุด</th>
                         <th>รถยนต์นั่งส่วนบุคคล เกิน 7 คน</th>
-                        <th>รถยนต์รับจ้างระหว่างจังหวัด /รถยนต์บริการ</th>
-                        <th>รถยนต์รับจ้าง</th>
                         <th>รถยนต์บรรทุกส่วนบุคคล /รถยนต์ลากจูง /รถแทรกเตอร์ที่มีได้ใช้ในการเกษตร</th>
                         <th>นิติบุคคลที่มิได้เป็นผู้ให้เช่าซื้อ(คูณ x)</th>
                         <th>ส่วนลด NGV/CNG(%)</th>
@@ -73,11 +71,9 @@
                                 <td field-key='end_weight'>{{ $rateWeight->end_weight }}</td>
                                 <td field-key='car1'>{{ $rateWeight->car1 }}</td>
                                 <td field-key='car2'>{{ $rateWeight->car2 }}</td>
-                                <td field-key='car3'>{{ $rateWeight->car3 }}</td>
-                                <td field-key='car4'>{{ $rateWeight->car4 }}</td>
-                                <td field-key='car4'>{{ $rateWeight->legalEntity }}</td>
-                                <td field-key='car4'>{{ $rateWeight->ngv_cng }}</td>
-                                <td field-key='car4'>{{ $rateWeight->hybrid }}</td>
+                                <td field-key='legalEntity'>{{ $rateWeight->legalEntity }}</td>
+                                <td field-key='ngv_cng'>{{ $rateWeight->ngv_cng }}</td>
+                                <td field-key='hybrid'>{{ $rateWeight->hybrid }}</td>
                                     <td field-key='percen_late'>{{ $rateWeight->percen_late }}</td>
                                     <td field-key='inspection'>{{ $rateWeight->inspection }}</td>
                                     <td field-key='tax_car_service'>{{ $rateWeight->tax_car_service }}</td>

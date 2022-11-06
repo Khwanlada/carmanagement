@@ -230,13 +230,12 @@
                                         <div class="form-group col-md-6">
                                             <div class="form-check" style="text-align: right;padding-top:5px;">
                                                 <label class="form-check-label">
-                                                    CC คูณ x
+                                                  
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <input type="number" class="form-control" id="txtRateCc" name="txtRateCc"
-                                                   placeholder="0.00">
+
                                         </div>
                                     </div>
                                 </div>
@@ -287,12 +286,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <input type="number" class="form-control" id="percen_discount_amount"
+                                            <input type="number" class="form-control" id="percen_discount_amount" readonly
                                                    name="percen_discount_amount" placeholder="Amount"
                                             >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <input type="number" class="form-control" id="percen_discount"
+                                            <input type="number" class="form-control" id="percen_discount" readonly
                                                    name="percen_discount" placeholder="Percen Discount"
                                             >
                                         </div>
@@ -335,43 +334,6 @@
                                 <div class="form-group can-hide">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6 more-late-show-hide">
-                                            <select class="form-control rateCcs-class"
-                                                    style="display: none;">
-                                                <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                    ตามความจุกระบอกสูบ (ซีซี.) -
-                                                </option>
-                                                <option value="1">ไม่เกิน 5 ปี cc น้อยกว่า 600</option>
-                                                <option value="2">ไม่เกิน 5 ปี cc 601 - 1,800</option>
-                                                <option value="3">ไม่เกิน 5 ปี cc เกิน 1,800</option>
-                                                <option value="5">เป็นรถเก่าใช้งานมานานเกิน 6 ปี ให้ลดภาษี</option>
-                                                <option value="6">เป็นรถเก่าใช้งานมานานเกิน 7 ปี ให้ลดภาษี</option>
-                                                <option value="7">เป็นรถเก่าใช้งานมานานเกิน 8 ปี ให้ลดภาษี</option>
-                                                <option value="8">เป็นรถเก่าใช้งานมานานเกิน 9 ปี ให้ลดภาษี</option>
-                                                <option value="9">เป็นรถเก่าใช้งานมานานเกิน 10 ปี หรือปีต่อๆไป</option>
-                                                <option value="10">รถจักรยานยนต์</option>
-                                            </select>
-                                            <select class="form-control rateWeights-class"
-                                                    name="month_rate_1_rateWeights" style="display: none;">
-                                                <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                    คิดตามน้ำหนักรถ -
-                                                </option>
-                                                <option value="1">ไม่เกิน 500</option>
-                                                <option value="2">501 - 750</option>
-                                                <option value="3">751 - 1,000</option>
-                                                <option value="4">1,001 - 1,250</option>
-                                                <option value="5">1,251 - 1,500</option>
-                                                <option value="6">1,501 - 1,750</option>
-                                                <option value="7">1,751 - 2,000</option>
-                                                <option value="8">2,001 - 2,500</option>
-                                                <option value="9">2,501 - 3,000</option>
-                                                <option value="10">3,001 - 3,500</option>
-                                                <option value="11">3,501 - 4,000</option>
-                                                <option value="12">4,001 - 4,500</option>
-                                                <option value="13">4,501 - 5,000</option>
-                                                <option value="14">5,001 - 6,000</option>
-                                                <option value="15">6,001 - 7,000</option>
-                                                <option value="16">7,000 ขึ้นไป</option>
-                                            </select>
                                         </div>
                                         <div class="form-group col-md-2">
                                             <input type="number" class="form-control month_rate" id="month_rate_1"
@@ -391,43 +353,7 @@
                                 <div class="form-group can-hide">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6 more-late-show-hide">
-                                            <select class="form-control rateCcs-class"
-                                                    style="display: none;">
-                                                <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                    ตามความจุกระบอกสูบ (ซีซี.) -
-                                                </option>
-                                                <option value="1">ไม่เกิน 5 ปี cc น้อยกว่า 600</option>
-                                                <option value="2">ไม่เกิน 5 ปี cc 601 - 1,800</option>
-                                                <option value="3">ไม่เกิน 5 ปี cc เกิน 1,800</option>
-                                                <option value="5">เป็นรถเก่าใช้งานมานานเกิน 6 ปี ให้ลดภาษี</option>
-                                                <option value="6">เป็นรถเก่าใช้งานมานานเกิน 7 ปี ให้ลดภาษี</option>
-                                                <option value="7">เป็นรถเก่าใช้งานมานานเกิน 8 ปี ให้ลดภาษี</option>
-                                                <option value="8">เป็นรถเก่าใช้งานมานานเกิน 9 ปี ให้ลดภาษี</option>
-                                                <option value="9">เป็นรถเก่าใช้งานมานานเกิน 10 ปี หรือปีต่อๆไป</option>
-                                                <option value="10">รถจักรยานยนต์</option>
-                                            </select>
-                                            <select class="form-control rateWeights-class"
-                                                    name="month_rate_2_rateWeights" style="display: none;">
-                                                <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                    คิดตามน้ำหนักรถ -
-                                                </option>
-                                                <option value="1">ไม่เกิน 500</option>
-                                                <option value="2">501 - 750</option>
-                                                <option value="3">751 - 1,000</option>
-                                                <option value="4">1,001 - 1,250</option>
-                                                <option value="5">1,251 - 1,500</option>
-                                                <option value="6">1,501 - 1,750</option>
-                                                <option value="7">1,751 - 2,000</option>
-                                                <option value="8">2,001 - 2,500</option>
-                                                <option value="9">2,501 - 3,000</option>
-                                                <option value="10">3,001 - 3,500</option>
-                                                <option value="11">3,501 - 4,000</option>
-                                                <option value="12">4,001 - 4,500</option>
-                                                <option value="13">4,501 - 5,000</option>
-                                                <option value="14">5,001 - 6,000</option>
-                                                <option value="15">6,001 - 7,000</option>
-                                                <option value="16">7,000 ขึ้นไป</option>
-                                            </select>
+
                                         </div>
                                         <div class="form-group col-md-2">
                                             <input type="number" class="form-control month_rate" id="month_rate_2"
@@ -447,43 +373,7 @@
                                 <div class="form-group can-hide">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6 more-late-show-hide">
-                                            <select class="form-control rateCcs-class"
-                                                    style="display: none;">
-                                                <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                    ตามความจุกระบอกสูบ (ซีซี.) -
-                                                </option>
-                                                <option value="1">ไม่เกิน 5 ปี cc น้อยกว่า 600</option>
-                                                <option value="2">ไม่เกิน 5 ปี cc 601 - 1,800</option>
-                                                <option value="3">ไม่เกิน 5 ปี cc เกิน 1,800</option>
-                                                <option value="5">เป็นรถเก่าใช้งานมานานเกิน 6 ปี ให้ลดภาษี</option>
-                                                <option value="6">เป็นรถเก่าใช้งานมานานเกิน 7 ปี ให้ลดภาษี</option>
-                                                <option value="7">เป็นรถเก่าใช้งานมานานเกิน 8 ปี ให้ลดภาษี</option>
-                                                <option value="8">เป็นรถเก่าใช้งานมานานเกิน 9 ปี ให้ลดภาษี</option>
-                                                <option value="9">เป็นรถเก่าใช้งานมานานเกิน 10 ปี หรือปีต่อๆไป</option>
-                                                <option value="10">รถจักรยานยนต์</option>
-                                            </select>
-                                            <select class="form-control rateWeights-class"
-                                                    name="month_rate_3_rateWeights" style="display: none;">
-                                                <option selected="selected" value="">- เลือก อัตราการเสียภาษีรถ
-                                                    คิดตามน้ำหนักรถ -
-                                                </option>
-                                                <option value="1">ไม่เกิน 500</option>
-                                                <option value="2">501 - 750</option>
-                                                <option value="3">751 - 1,000</option>
-                                                <option value="4">1,001 - 1,250</option>
-                                                <option value="5">1,251 - 1,500</option>
-                                                <option value="6">1,501 - 1,750</option>
-                                                <option value="7">1,751 - 2,000</option>
-                                                <option value="8">2,001 - 2,500</option>
-                                                <option value="9">2,501 - 3,000</option>
-                                                <option value="10">3,001 - 3,500</option>
-                                                <option value="11">3,501 - 4,000</option>
-                                                <option value="12">4,001 - 4,500</option>
-                                                <option value="13">4,501 - 5,000</option>
-                                                <option value="14">5,001 - 6,000</option>
-                                                <option value="15">6,001 - 7,000</option>
-                                                <option value="16">7,000 ขึ้นไป</option>
-                                            </select>
+ 
                                         </div>
                                         <div class="form-group col-md-2">
                                             <input type="number" class="form-control month_rate" id="month_rate_3"
@@ -798,21 +688,18 @@ $(document).ready(function(){
                 if(rate_ccs_id !== ""){
                     // users selected cc reate droupdown
                             var cc = isNaN(parseFloat($("[name='cc']").val())) ? 0 : parseFloat($("[name='cc']").val());
-                            var rateCc = isNaN(parseFloat($reference_rateCss.rate)) ? 0 : parseFloat(($reference_rateCss.rate));
 
                             var totalCalBeforeRate = 0.0;
-                            if (cc <= 600) {
-                                totalCalBeforeRate += cc * rateCc;
-                            }
-                            else if (cc >= 601 && cc <= 1800) {
-                                totalCalBeforeRate += 600 * 0.5;
-                                totalCalBeforeRate += (cc - 600) * rateCc;
-                            }
-                            else if (cc >= 1801) {
-                                totalCalBeforeRate += 600 * 0.5;//600
-                                totalCalBeforeRate += 1200 * 1.5;//1200
-                                totalCalBeforeRate += (cc - 1800) * rateCc;
-                            }
+                                if (cc <= 600) {
+                                    totalCalBeforeRate += cc * 0.5;
+                                } else if (cc >= 601 && cc <= 1800) {
+                                    totalCalBeforeRate += 600 * 0.5;
+                                    totalCalBeforeRate += (cc - 600) * 1.5;
+                                } else if (cc >= 1801) {
+                                    totalCalBeforeRate += 600 * 0.5;//600
+                                    totalCalBeforeRate += 1200 * 1.5;//1200
+                                    totalCalBeforeRate += (cc - 1800) * 4;
+                                }
 
                             totalRate = totalCalBeforeRate;
 
@@ -827,6 +714,13 @@ $(document).ready(function(){
                             }
 
                         $("#rate").val(totalRate.toFixed(2));
+
+                        //add psercen discount
+                        var percenDiscount = isNaN(parseFloat($("#percen_discount").val())) ? 0 : parseFloat($("#percen_discount").val());
+                        var totalDiscount = ((totalRate * percenDiscount) / 100);
+                        $("#percen_discount_amount").val(totalDiscount);
+
+
                         calCulateTotal();
                 }
             }
@@ -845,7 +739,7 @@ $(document).ready(function(){
                         if(typeId == 2){
                             rateWeight = calWeight.car1;
                         }else if(typeId == 3){
-                            rateWeight = calWeight.car4;
+                            rateWeight = calWeight.car2;
                         }
 
                         $("#txtRateWeight").val(rateWeight);
@@ -871,6 +765,21 @@ $(document).ready(function(){
             $("[name='cc']").trigger('input');
             $("[name='weight']").trigger('input');
         });
+
+        $("[name='percen_late_month'],[name='percen_late']").bind("input", function(){
+            var crRate = isNaN(parseFloat($("#rate").val())) ? 0 : parseFloat($("#rate").val());
+            var crPercenLate = isNaN(parseFloat($("#percen_late").val())) ? 0 : parseFloat($("#percen_late").val());
+            var crPercenLateMonth = isNaN(parseFloat($("#percen_late_month").val())) ? 0 : parseFloat($("#percen_late_month").val());
+            var percenDiscountAmount = isNaN(parseFloat($("#percen_discount_amount").val())) ? 0 : parseFloat($("#percen_discount_amount").val());
+
+            if ($("#ispercen_discount").prop("checked") === true) {
+                $("#total_percen_late").val(crPercenLateMonth * (((crRate - percenDiscountAmount) * crPercenLate) / 100));
+            } else {
+                $("#total_percen_late").val(crPercenLateMonth * ((crRate * crPercenLate) / 100));
+            }
+            $("[name='total_percen_late']").trigger('input');
+        });
+        
 });
     
     $('.date').datepicker({
@@ -1025,6 +934,13 @@ $(document).ready(function(){
                 if ($("#isother_service3").prop("checked") === true) {
                     totalNet += isNaN(parseFloat($("#other_service3").val())) ? 0 : parseFloat($("#other_service3").val());
                 }
+                if ($("#ispercen_late").prop("checked") === true) {
+                    totalNet += isNaN(parseFloat($("#total_percen_late").val())) ? 0 : parseFloat($("#total_percen_late").val());
+                }
+                if ($("#ispercen_discount").prop("checked") === true) {
+                    totalNet -= isNaN(parseFloat($("#percen_discount_amount").val())) ? 0 : parseFloat($("#percen_discount_amount").val());
+                }
+
                     totalNet -= isNaN(parseFloat($("#discount").val())) ? 0 : parseFloat($("#discount").val());
                 
                 
@@ -1055,6 +971,7 @@ $(document).ready(function(){
                    $("#istax_car_service").prop('checked',true);
                    $("#inspection").val(datas.inspection);
                    $("#tax_car_service").val(datas.tax_car_service);
+                   $("#percen_late").val(datas.percen_late);
 
                    if(datas.id>3){
                     $("#ispercen_discount").prop('checked',true);
@@ -1062,7 +979,7 @@ $(document).ready(function(){
                    }
 
                     $("[name='cc']").trigger('input');
-
+                    
                    calCulateTotal();
                 }
             });
@@ -1090,6 +1007,7 @@ $(document).ready(function(){
                    $("#istax_car_service").prop('checked',true);
                    $("#inspection").val(datas.inspection);
                    $("#tax_car_service").val(datas.tax_car_service);
+                   $("#percen_late").val(datas.percen_late);
 
                    if(datas.id>3){
                     $("#ispercen_discount").prop('checked',true);

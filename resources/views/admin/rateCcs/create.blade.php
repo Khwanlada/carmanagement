@@ -72,18 +72,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    <label for="rate" class="control-label">บาท(CC คูณ x)</label>
-                    {!! Form::number('rate', old('rate'), ['class' => 'form-control', 'placeholder' => 'Enter rate', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('rate'))
-                        <p class="help-block">
-                            {{ $errors->first('rate') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     <label for="percen_discount" class="control-label">รถเก่าใช้งานมานานเกิน 5 ปี ให้ลดภาษี(% จากภาษี)</label>
                     {!! Form::number('percen_discount', old('percen_discount'), ['class' => 'form-control', 'placeholder' => 'Enter Percen Discount', 'required' => '']) !!}
                     <p class="help-block"></p>
