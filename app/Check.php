@@ -15,7 +15,7 @@ class Check extends Model
         'month_rate_1','month_rate_1_total','month_rate_1_more','month_rate_1_fines',
         'month_rate_2','month_rate_2_total','month_rate_2_more','month_rate_2_fines',
         'month_rate_3','month_rate_3_total','month_rate_3_more','month_rate_3_fines',
-        'create_by','receive_date','type_text','is_product_cmi','is_product_vmi','txt_product_cmi','txt_product_vmi',
+        'create_by','receive_date','is_product_cmi','is_product_vmi','txt_product_cmi','txt_product_vmi',
         'dlt_total_net','dlt_extra_money','dlt_money_refund','iscmi_service','cmi_service','discount','normal_remark',
         'isCopyBook'];
 
