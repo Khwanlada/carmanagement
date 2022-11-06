@@ -794,7 +794,7 @@ $(document).ready(function(){
                         }
             }else{
                 var rate_ccs_id = $("[name='rate_ccs_id']").val();
-                var rate_weights_id = $("[name='rate_weights_id']").val();
+
                 if(rate_ccs_id !== ""){
                     // users selected cc reate droupdown
                             var cc = isNaN(parseFloat($("[name='cc']").val())) ? 0 : parseFloat($("[name='cc']").val());
@@ -829,16 +829,22 @@ $(document).ready(function(){
                         $("#rate").val(totalRate.toFixed(2));
                         calCulateTotal();
                 }
-                else if(rate_weights_id !== ""){
+            }
+        });
+        $("[name='weight']").bind("input", function(){
+            var typeId = $("[name='car_type_id']").val();
+            var rate_weights_id = $("[name='rate_weights_id']").val();
+            if(rate_weights_id !== ""){
                     // users selected weight reate droupdown
+                       
                         var weg = isNaN(parseFloat($("[name='weight']").val())) ? 0 : parseFloat($("[name='weight']").val());
 
                         var calWeight = $reference_rateWeight;
 
                         var rateWeight = 0;
-                        if(typeId === 2){
+                        if(typeId == 2){
                             rateWeight = calWeight.car1;
-                        }else if(typeId === 3){
+                        }else if(typeId == 3){
                             rateWeight = calWeight.car4;
                         }
 
@@ -846,22 +852,25 @@ $(document).ready(function(){
                         totalRate = rateWeight;
 
                         if ($("#ngvcng").prop("checked") === true) {
-                            totalRate = rateWeight - (rateWeight * rwObj.ngv_cng) / 100;
+                            totalRate = rateWeight - (rateWeight * $reference_rateWeight.ngv_cng) / 100;
                         } else if ($("#hybrid").prop("checked") === true) {
-                            totalRate = rateWeight - (rateWeight * rwObj.hybrid) / 100;
+                            totalRate = rateWeight - (rateWeight * $reference_rateWeight.hybrid) / 100;
                         }
 
                         if ($("#legalEntity").prop("checked") === true) {
-                            totalRate = totalRate * rwObj.legalEntity;
+                            totalRate = totalRate * $reference_rateWeight.legalEntity;
                         }
 
                     $("#rate").val(totalRate.toFixed(2));
 
                     calCulateTotal();
                 }
-            }
         });
 
+        $("[id='legalEntity'],[id='ngvcng'],[id='hybrid']").bind("click", function(){
+            $("[name='cc']").trigger('input');
+            $("[name='weight']").trigger('input');
+        });
 });
     
     $('.date').datepicker({
