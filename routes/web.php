@@ -61,9 +61,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('checks_mass_destroy', ['uses' => 'Admin\ChecksController@massDestroy', 'as' => 'checks.mass_destroy']);
     Route::post('checks_restore/{id}', ['uses' => 'Admin\ChecksController@restore', 'as' => 'checks.restore']);
     Route::delete('checks_perma_del/{id}', ['uses' => 'Admin\ChecksController@perma_del', 'as' => 'checks.perma_del']);
+    Route::post('ajaxRequestMoney', 'Admin\ChecksController@ajaxRequestPostMoney')->name('checks.ajaxRequestMoney.post');
+    Route::post('ajaxRequestMoneys', 'Admin\ChecksController@ajaxRequestPostMoneys')->name('checks.ajaxRequestMoneys.post');
 
     Route::post('ajaxRequest', 'Admin\ChecksController@ajaxRequestPost')->name('checks.ajaxRequest.post');
     Route::post('ajaxRequestWeight', 'Admin\ChecksController@ajaxRequestWeightPost')->name('checks.ajaxRequestWeight.post');
+
+    Route::resource('reportChecks', 'Admin\ReportsController');
+    Route::resource('reportCustomers', 'Admin\ReportCustomersController');
 
 });
 

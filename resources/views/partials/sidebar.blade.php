@@ -95,6 +95,38 @@
                 </li>
             @endcan
 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <span class="title">รายงาน</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+
+                @can('check_access')
+                    <li class="{{ $request->segment(2) == 'reportCustomers' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.reportCustomers.index') }}">
+                            <i class="fa fa-gears"></i>
+                            <span class="title">รายงาน การต่อภาษี (เพิ่ม,คืน)</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('check_access')
+                    <li class="{{ $request->segment(2) == 'reportChecks' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.reportChecks.index') }}">
+                            <i class="fa fa-gears"></i>
+                            <span class="title">รายงาน ตรวจสภาพรถ</span>
+                        </a>
+                    </li>
+                @endcan
+
+                </ul>
+            </li>
+
+
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">
                     <i class="fa fa-key"></i>

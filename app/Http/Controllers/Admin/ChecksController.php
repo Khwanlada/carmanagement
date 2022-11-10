@@ -40,6 +40,33 @@ class ChecksController extends Controller
         return response()->json([]);
     }
 
+    public function ajaxRequestPostMoney(Request $request)
+    {
+        $check = Check::findOrFail($request->id);
+        if($check) {
+            $check->dlt_total_net = $request->dlt_total_net;
+            $check->dlt_extra_money = $request->dlt_extra_money;
+            $check->dlt_money_refund = $request->dlt_money_refund;
+            $check->save();
+        }
+
+        return response()->json(['success'=>'save success full !']);
+    }
+
+    public function ajaxRequestPostMoneys(Request $request)
+    {
+        foreach (explode(',', $request->check_ids) as $checkId) {
+            $report = Check::findOrFail($checkId);
+            if ($report) {
+                $report->dlt_total_net = $report->rate-$report->percen_discount_amount;
+                $report->dlt_extra_money = 0.0;
+                $report->dlt_money_refund = 0.0;
+                $report->save();
+            }
+        }
+        return response()->json(['success' => 'save success full !']);
+    }
+
 
     /**
      * Display a listing of Check.
