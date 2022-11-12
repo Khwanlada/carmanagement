@@ -187,8 +187,8 @@
 
                             $sum_dlt_total_net += $report->dlt_total_net;
 
-                            $color = $expireDay ==7 ? "red" : "white";
-                            $color = $expireDay ==30 ? "orange" :  $color;
+                            $color = $diff_amount <=7  ? "red" : "white";
+                            $color = $diff_amount >7 && $diff_amount<=30 ? "orange" :  $color;
                             $font_color = $expireDay ==7 ? "white" : "black";
                             $font_color= $expireDay ==30 ? "white" :  $font_color;
 
