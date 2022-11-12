@@ -95,12 +95,8 @@
                     <select class="form-control"
                     name="expireDay">
                         <option selected="selected" value="">- โปรดเลือก -</option>
-                        <option value="2"> 2 วัน</option>
                         <option value="7"> 7 วัน</option>
-                        <option value="10"> 10 วัน</option>
-                        <option value="90"> 90 วัน</option>
-                        <option value="365">365 วัน</option>
-                        <option value="1825">1825 วัน</option>
+                        <option value="30"> 30 วัน</option>
                     </select>
                 </div>
             </div>
@@ -191,6 +187,11 @@
 
                             $sum_dlt_total_net += $report->dlt_total_net;
 
+                            $color = $expireDay ==7 ? "red" : "white";
+                            $color = $expireDay ==30 ? "orange" :  $color;
+                            $font_color = $expireDay ==7 ? "white" : "black";
+                            $font_color= $expireDay ==30 ? "white" :  $font_color;
+
                             ?>
                             <tr>
                                 <td field-key='index'>{{ $index+1 }}.</td>
@@ -206,7 +207,7 @@
                                 <td field-key='dlt_total_net' style="background-color: {{is_null($report->dlt_total_net) ? "white" : "green"}}" class="{{ $report->id}}_dlt_total_net">{{number_format($report->dlt_total_net,2,'.', '')}}</td>
                                 <td field-key='dlt_extra_money' class="{{ $report->id}}_dlt_extra_money">{{number_format($report->dlt_extra_money,2) == 0 ? "" : number_format($report->dlt_extra_money,2)}}</td>
                                 <td field-key='dlt_money_refund' class="{{ $report->id}}_dlt_money_refund">{{number_format($report->dlt_money_refund,2) == 0 ? "" : number_format($report->dlt_money_refund,2)}}</td>
-                                <td field-key='totalNet'>{{$diff_amount_date}}</td>
+                                <td field-key='totalNet'  style="text-align:center; background-color: {{$color}};color:{{$font_color}}">{{$diff_amount_date}}</td>
                                 <td field-key='sms'><button onclick="loadSmsData('{{$report->customer_name}}','{{$report->licence_no}}','{{$report->customer_tel}}','{{$report->is_product_cmi}}','{{$report->is_product_vmi}}')" class="btn btn-success" type="button" data-target="#modalSendSms" data-toggle="modal">SMS</button></td>
                             </tr>
                         @endif
