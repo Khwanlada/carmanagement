@@ -151,6 +151,7 @@
                     <th width="60">เพิ่ม</th>
                     <th width="60">คืน</th>
                     <th width="60">กำหนดวัน</th>
+                    <th width="60">Send Sms</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -206,6 +207,7 @@
                                 <td field-key='dlt_extra_money' class="{{ $report->id}}_dlt_extra_money">{{number_format($report->dlt_extra_money,2) == 0 ? "" : number_format($report->dlt_extra_money,2)}}</td>
                                 <td field-key='dlt_money_refund' class="{{ $report->id}}_dlt_money_refund">{{number_format($report->dlt_money_refund,2) == 0 ? "" : number_format($report->dlt_money_refund,2)}}</td>
                                 <td field-key='totalNet'>{{$diff_amount_date}}</td>
+                                <td field-key='sms'><button onclick="loadSmsData('{{$report->customer_name}}','{{$report->licence_no}}','{{$report->customer_tel}}','{{$report->is_product_cmi}}','{{$report->is_product_vmi}}')" class="btn btn-success" type="button" data-target="#modalSendSms" data-toggle="modal">SMS</button></td>
                             </tr>
                         @endif
                     @else
@@ -236,7 +238,8 @@
                             <td field-key='dlt_total_net' style="background-color: {{is_null($report->dlt_total_net) ? "white" : "green"}}" class="{{ $report->id}}_dlt_total_net">{{number_format($report->dlt_total_net,2,'.', '')}}</td>
                             <td field-key='dlt_extra_money' class="{{ $report->id}}_dlt_extra_money">{{number_format($report->dlt_extra_money,2) == 0 ? "" : number_format($report->dlt_extra_money,2)}}</td>
                             <td field-key='dlt_money_refund' class="{{ $report->id}}_dlt_money_refund">{{number_format($report->dlt_money_refund,2) == 0 ? "" : number_format($report->dlt_money_refund,2)}}</td>
-                            <td field-key='totalNet'>{{$diff_amount_date}}</td>
+                            <td field-key='amount'>{{$diff_amount_date}}</td>
+                            <td field-key='sms'><button onclick="loadSmsData('{{$report->customer_name}}','{{$report->licence_no}}','{{$report->customer_tel}}','{{$report->is_product_cmi}}','{{$report->is_product_vmi}}')" class="btn btn-success" type="button" data-target="#modalSendSms" data-toggle="modal">SMS</button></td>
                         </tr>
                     @endif
 
@@ -267,11 +270,44 @@
         </div>
     </div>
 
+    <div id="modalSendSms" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">SMS</h4>
+                </div>
+                <form id="formedit", method="post", action="">
+                    <input type="hidden" name="check_ids2" id="check_ids2"/>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <textarea readonly="readonly" rows="5" class="form-control" name="content_sms" id="content_sms">
+                                คุณ [customer_name] พรบ./ประกัน ของหมายเลขทะเบียนรถ [licence_no] ใกล้หมดอายุ
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="SumitSendSms" class="btn btn-default">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 <input type="hidden" id="start_date" value="{{$start_date}}"/>
 <input type="hidden" id="end_date" value="{{$end_date}}"/>
 <input type="hidden" id="expireDay" value="{{$expireDay}}"/>
 <input type="hidden" id="typeId" value="{{$typeId}}"/>
+
+<input type="hidden" id="hd_customer_name" value=""/>
+<input type="hidden" id="hd_licence_no" value=""/>
+<input type="hidden" id="hd_customer_tel" value=""/>
+<input type="hidden" id="hd_is_product_cmi" value=""/>
+<input type="hidden" id="hd_is_product_vmi" value=""/>
+
+
 @stop
 
 @section('javascript')
@@ -346,6 +382,43 @@
 
             $printSection.appendChild(domClone);
         }
+
+        function loadSmsData(customer_name,licence_no,customer_tel,is_product_cmi,is_product_vmi){
+            $("#hd_customer_name").val(customer_name);
+            $("#hd_licence_no").val(licence_no);
+            $("#hd_customer_tel").val(customer_tel);
+            $("#hd_is_product_cmi").val(is_product_cmi);
+            $("#hd_is_product_vmi").val(is_product_vmi);
+
+            let content_sms = $("#content_sms").val();
+            content_sms = content_sms.replace("[customer_name]", customer_name)
+            content_sms = content_sms.replace("[licence_no]", licence_no)
+            $("#content_sms").val(content_sms);
+        }
+
+
+        $("#SumitSendSms").click(function(e){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+        $.ajax({
+                url: "{{ route('admin.checks.ajaxRequestSms.post') }}",
+                type: "POST",
+                data: JSON.stringify({
+                    sms: $.trim($("#content_sms").val()),
+                    tel: $.trim($("#hd_customer_tel").val()),
+                }),
+                success: function (datas) {
+                   // console.log(datas);
+                   alert(data);
+                }
+            });
+
+
+        });
 
 
     </script>

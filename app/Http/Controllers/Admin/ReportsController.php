@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreReportsRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
@@ -28,8 +29,8 @@ class ReportsController extends Controller
         $typeId = request("type");
         $start_date = request("s_date");
         $end_date = request("e_date");
-
-        return view('admin.reportChecks.index', compact('reports','typeId','start_date','end_date'));
+        $expireDay = "";
+        return view('admin.reportChecks.index', compact('reports','typeId','start_date','end_date','expireDay'));
     }
 
     public function store(StoreReportsRequest $request)
@@ -60,6 +61,30 @@ class ReportsController extends Controller
         }
 
         return view('admin.reportChecks.index', compact('reports','typeId','start_date','end_date','expireDay'));
+    }
+
+    public function ajaxRequestPost(Request $request)
+    {
+        $sms = $request->json()->get('sms');
+        $tel = $request->json()->get('tel');
+
+        $client = new \GuzzleHttp\Client();
+        
+        $response = $client->request('POST', 'https://api-v2.thaibulksms.com/sms', [
+          'form_params' => [
+            'msisdn' =>  $tel,
+            'message' => $sms ,
+            'sender' => 'Demo'
+          ],
+          'headers' => [
+            'accept' => 'application/json',
+            'authorization' => 'Basic S1FBWFVxLWxRZFBlcDY5MmJKaU9mcVk3WU1mdzFYOnpSMkt0aTdDNUVrSTFKUFJ5ZTlEREMxdjhxVFhJZA==',
+            'content-type' => 'application/x-www-form-urlencoded',
+          ],
+        ]);
+        
+        return $response->getBody();
+
     }
 
 }

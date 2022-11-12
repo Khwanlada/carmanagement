@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     Route::resource('reportChecks', 'Admin\ReportsController');
     Route::resource('reportCustomers', 'Admin\ReportCustomersController');
+    
+    Route::post('ajaxRequestSms', 'Admin\ReportsController@ajaxRequestPost')->name('checks.ajaxRequestSms.post');
 
 });
 
