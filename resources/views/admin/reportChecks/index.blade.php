@@ -90,6 +90,19 @@
                         </option>
                     </select>
                 </div>
+                <div class="col-xs-3 form-group">
+                    <label for="change" class="control-label">ใกล้ถึงวันครบกำหนด ต่อ พรบ ประกัน</label>
+                    <select class="form-control"
+                    name="expireDay">
+                        <option selected="selected" value="">- โปรดเลือก -</option>
+                        <option value="2"> 2 วัน</option>
+                        <option value="7"> 7 วัน</option>
+                        <option value="10"> 10 วัน</option>
+                        <option value="90"> 90 วัน</option>
+                        <option value="365">365 วัน</option>
+                        <option value="1825">1825 วัน</option>
+                    </select>
+                </div>
             </div>
             <div class="row search-form">
                 <div class="col-xs-2 form-group">
@@ -137,6 +150,7 @@
 
                     <th width="60">เพิ่ม</th>
                     <th width="60">คืน</th>
+                    <th width="60">กำหนดวัน</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -149,10 +163,52 @@
                 $sum_dlt_total_net = 0;
                 $sum_dlt_extra_money = 0;
                 $sum_dlt_money_refund = 0;
+                $diff_day = 0;
                 
                 ?>
                 @if (count($reports) > 0)
                     @foreach ($reports as $index => $report)
+                    <?php
+                    $date1 = date_create ($report->check_date);
+                    $date2 = date_create (date("Y-m-d"));
+                    $diff = date_diff ($date1, $date2);
+                    $diff_amount_date =  $diff -> format ("%R%a days");
+                    $diff_amount =  $diff -> format ("%a");
+
+                    ?>
+                    @if(isset($expireDay) && $expireDay !="")
+                        @if($diff_amount <= $expireDay && ($report->is_product_cmi ===1 || $report->is_product_vmi === 1))
+                            <?php
+                            $sum_totalNet += $report->totalNet;
+                            $sum_total_percen_late += $report->total_percen_late;
+                            $sum_tax_car_service += $report->tax_car_service;
+
+                            $sum_rate = $report->rate-$report->percen_discount_amount;
+
+                            $sum_dlt_extra_money += $report->dlt_extra_money;
+                            $sum_dlt_money_refund += $report->dlt_money_refund;
+
+                            $sum_dlt_total_net += $report->dlt_total_net;
+
+                            ?>
+                            <tr>
+                                <td field-key='index'>{{ $index+1 }}.</td>
+                                <td field-key="id">#{{ $report->id}}</td>
+                                <td field-key='created_at'>{{ $report->check_date}}</td>
+                                <td field-key='register_no'>{{ $report->licence_no }}</td>
+                                <td field-key='register_no'>{{ $report->isCopyBook == 'on' ? "เล่มทะเบียน" : "สำเนารถ" }}</td>
+
+                                <td field-key='totalNet'>{{number_format($report->totalNet,2)}}</td>
+                                <td field-key='totalNet'>{{number_format($report->total_percen_late,2)}}</td>
+                                <td field-key='totalNet'>{{number_format($report->tax_car_service,2)}}</td>
+
+                                <td field-key='dlt_total_net' style="background-color: {{is_null($report->dlt_total_net) ? "white" : "green"}}" class="{{ $report->id}}_dlt_total_net">{{number_format($report->dlt_total_net,2,'.', '')}}</td>
+                                <td field-key='dlt_extra_money' class="{{ $report->id}}_dlt_extra_money">{{number_format($report->dlt_extra_money,2) == 0 ? "" : number_format($report->dlt_extra_money,2)}}</td>
+                                <td field-key='dlt_money_refund' class="{{ $report->id}}_dlt_money_refund">{{number_format($report->dlt_money_refund,2) == 0 ? "" : number_format($report->dlt_money_refund,2)}}</td>
+                                <td field-key='totalNet'>{{$diff_amount_date}}</td>
+                            </tr>
+                        @endif
+                    @else
                         <?php
                         $sum_totalNet += $report->totalNet;
                         $sum_total_percen_late += $report->total_percen_late;
@@ -169,7 +225,7 @@
                         <tr>
                             <td field-key='index'>{{ $index+1 }}.</td>
                             <td field-key="id">#{{ $report->id}}</td>
-                            <td field-key='created_at'>{{ $report->check_date }}</td>
+                            <td field-key='created_at'>{{ $report->check_date}}</td>
                             <td field-key='register_no'>{{ $report->licence_no }}</td>
                             <td field-key='register_no'>{{ $report->isCopyBook == 'on' ? "เล่มทะเบียน" : "สำเนารถ" }}</td>
 
@@ -180,7 +236,10 @@
                             <td field-key='dlt_total_net' style="background-color: {{is_null($report->dlt_total_net) ? "white" : "green"}}" class="{{ $report->id}}_dlt_total_net">{{number_format($report->dlt_total_net,2,'.', '')}}</td>
                             <td field-key='dlt_extra_money' class="{{ $report->id}}_dlt_extra_money">{{number_format($report->dlt_extra_money,2) == 0 ? "" : number_format($report->dlt_extra_money,2)}}</td>
                             <td field-key='dlt_money_refund' class="{{ $report->id}}_dlt_money_refund">{{number_format($report->dlt_money_refund,2) == 0 ? "" : number_format($report->dlt_money_refund,2)}}</td>
+                            <td field-key='totalNet'>{{$diff_amount_date}}</td>
                         </tr>
+                    @endif
+
                     @endforeach
                 @else
                     <tr>
@@ -211,6 +270,8 @@
 
 <input type="hidden" id="start_date" value="{{$start_date}}"/>
 <input type="hidden" id="end_date" value="{{$end_date}}"/>
+<input type="hidden" id="expireDay" value="{{$expireDay}}"/>
+<input type="hidden" id="typeId" value="{{$typeId}}"/>
 @stop
 
 @section('javascript')
@@ -238,6 +299,15 @@
             dateFormat: "{{ config('app.date_format_js') }}"
         }).datepicker("setDate", new Date());
         @endif
+
+        @if(isset($expireDay))
+            $("[name='expireDay']").val($("#expireDay").val());
+        @endif
+        @if(isset($typeId))
+            $("[name='type']").val($("#typeId").val());
+        @endif
+        
+        
 
         $(".tdDetails").attr("style", "display:none");
 

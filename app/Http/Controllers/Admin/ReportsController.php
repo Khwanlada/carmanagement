@@ -40,26 +40,26 @@ class ReportsController extends Controller
         $input = $request->all();
 
         $typeId = $input["type"];
+        $expireDay = request("expireDay");
         $start_date = request("s_date");
         $end_date = request("e_date");
 
         if(!empty($typeId)){
             $reports = Check::join('users', 'users.email', '=', 'checks.create_by')
-                ->where('users.location_id', '=', Auth::user()->location->id)
-                ->where('checks.car_type_id', '=',  $typeId)
-                ->whereBetween('checks.check_date', [$start_date, $end_date])
-                ->orderBy('checks.car_type_id','desc')
-                ->get(['checks.*']);
-
+            ->where('users.location_id', '=', Auth::user()->location->id)
+            ->where('checks.car_type_id', '=',  $typeId)
+            ->whereBetween('checks.check_date', [$start_date, $end_date])
+            ->orderBy('checks.car_type_id','desc')
+            ->get(['checks.*']);
         }else{
             $reports = Check::join('users', 'users.email', '=', 'checks.create_by')
-                ->where('users.location_id', '=', Auth::user()->location->id)
-                ->whereBetween('checks.check_date', [$start_date, $end_date])
-                ->orderBy('checks.car_type_id','desc')
-                ->get(['checks.*']);
+            ->where('users.location_id', '=', Auth::user()->location->id)
+            ->whereBetween('checks.check_date', [$start_date, $end_date])
+            ->orderBy('checks.car_type_id','desc')
+            ->get(['checks.*']);
         }
 
-        return view('admin.reportChecks.index', compact('reports','typeId','start_date','end_date'));
+        return view('admin.reportChecks.index', compact('reports','typeId','start_date','end_date','expireDay'));
     }
 
 }
